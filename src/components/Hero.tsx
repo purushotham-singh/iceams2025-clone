@@ -17,19 +17,19 @@ export default function Hero() {
 
         {/* Conference Info Right */}
         <div className="text-center md:text-right">
-          <h2 className="text-xl text-cyan-300 font-mono uppercase tracking-wider">2–5 July 2025</h2>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-cyan-400">IIT Hyderabad, Kandi, Telangana, India</h1>
-          <p className="mt-6 text-lg text-lime-400">
-            Theme: <span className="italic text-lime-300">"Advanced Materials and Structures – Innovations, Technologies and Way Forward"</span>
+          <h2 className="text-xl font-mono uppercase tracking-wider text-gray-500">2–5 July 2025</h2>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900">IIT Hyderabad, Kandi, Telangana, India</h1>
+          <p className="mt-6 text-lg text-gray-700">
+            Theme: <span className="italic text-gray-500">&ldquo;Advanced Materials and Structures – Innovations, Technologies and Way Forward&rdquo;</span>
           </p>
-          <p className="mt-2 text-gray-400">Conference Dates: <span className="text-yellow-400">2–5 July 2025</span></p>
+          <p className="mt-2 text-gray-600">Conference Dates: <span className="text-gray-700">2–5 July 2025</span></p>
         </div>
       </main>
 
       {/* Description */}
       <div className="w-full text-center mt-12">
-        <h2 className="text-3xl font-bold text-cyan-300 mb-4">ICEAMS–2025</h2>
-        <p className="text-lg text-gray-300 leading-relaxed">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">ICEAMS–2025</h2>
+        <p className="text-lg text-gray-700 leading-relaxed">
           ISAMPE Hyderabad Chapter and IIT Hyderabad in association with DRDO (ASL) are organizing the
           1st International Conference & Exhibition on Advanced Materials and Structures (ICEAMS-2025)
           from <strong>2nd to 5th July 2025</strong> at IIT Hyderabad. The event focuses on key areas like

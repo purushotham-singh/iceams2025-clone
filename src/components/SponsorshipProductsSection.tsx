@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 
 export default function SponsorshipProductsSection() {
   const products = [
@@ -57,10 +58,12 @@ export default function SponsorshipProductsSection() {
               key={product.title}
               className="bg-white rounded-2xl border border-gray-200 shadow-md p-6 hover:shadow-xl hover:scale-105 transition-transform duration-300"
             >
-              <img
+              <Image
                 src={product.image}
                 alt={product.title}
-                className="h-32 w-full object-contain mb-4"
+                width={128}
+                height={128}
+                className="object-contain mb-4 w-full"
               />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 {product.title}

@@ -1,6 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+const MotionImage = motion(Image);
 
 export function Banner() {
   return (
@@ -14,7 +17,7 @@ export function Banner() {
         <motion.h1
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          transition={{ delay: 0.3, duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
           className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 drop-shadow-sm mb-4"
         >
           ICEAMS–2025
@@ -55,11 +58,13 @@ export function Banner() {
           }}
         >
           {["drdo-logo.png", "isampe-logo.png", "iith-logo.png"].map((logo, i) => (
-            <motion.img
+            <MotionImage
               key={i}
               src={`/images/${logo}`}
               alt={`${logo.split('-')[0]} Logo`}
-              className="h-20 transition-transform hover:scale-105 duration-300 ease-in-out"
+              width={80}
+              height={80}
+              className="object-contain transition-transform hover:scale-105 duration-300 ease-in-out"
               variants={{
                 hidden: { opacity: 0, scale: 0.9 },
                 visible: { opacity: 1, scale: 1 },

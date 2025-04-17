@@ -2,7 +2,8 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 
 export const metadata = {
-  title: 'ICEAMS 2025 | IIT Hyderabad',
+  title: 'Purushotham Internship',
+  // title: 'ICEAMS 2025 | IIT Hyderabad',
   description: 'International Conference on Emerging Advances in Materials and Structures',
 };
 

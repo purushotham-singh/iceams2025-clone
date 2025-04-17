@@ -1,6 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import { Banner } from "@/components/ Banner";
+import { Banner } from "@/components/Banner";
 import AboutIceamsSection from "@/components/AboutIceamsSection";
 import CallForPapersSection from "@/components/CallForPapersSection";
 import { CallForPapersSection2 } from "@/components/CallForPapersSection2";

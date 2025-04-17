@@ -1,18 +1,13 @@
 'use client';
 import React from 'react';
-import { useRouter } from 'next/navigation';
+ 
 import { motion } from 'framer-motion';
 
-export default function RegistrationFormPage() {
-  const router = useRouter();
-
- 
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      // Optionally validate or send to backend here
-      alert('Registration Submitted Successfully ✅');
-      router.push('/'); // Redirect to homepage
-    };
+export default function RegistrationFormPage({
+  handleSubmit,
+}: {
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}) {
   return (
     <motion.main
       initial={{ opacity: 0, y: 30 }}

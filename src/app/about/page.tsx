@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 
 export default function HomePage() {
   return (
@@ -14,8 +15,20 @@ export default function HomePage() {
           </p>
         </div>
         <div className="flex justify-center gap-6 flex-wrap mt-8">
-          <img src="/images/isampe-logo.png" alt="ISAMPE Logo" className="h-24" />
-          <img src="/images/iith-logo.png" alt="IITH Logo" className="h-24" />
+          <Image
+            src="/images/isampe-logo.png"
+            alt="ISAMPE Logo"
+            width={96}
+            height={96}
+            className="object-contain"
+          />
+          <Image
+            src="/images/iith-logo.png"
+            alt="IITH Logo"
+            width={96}
+            height={96}
+            className="object-contain"
+          />
         </div>
       </section>
 
@@ -39,7 +52,13 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-semibold text-yellow-300 mb-8">Registration for ICEAMS2025</h2>
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            <img src="/images/registration-form.png" alt="Registration Form" className="rounded-lg shadow-md" />
+            <Image
+              src="/images/registration-form.png"
+              alt="Registration Form"
+              width={600}
+              height={400}
+              className="rounded-lg shadow-md"
+            />
             <div className="text-gray-700 space-y-2 text-sm leading-loose">
               <ul className="list-disc list-inside text-green-400 text-left">
                 <li>ISAMPE Members: ₹8000</li>
@@ -73,7 +92,13 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold text-center mb-4">Exhibition and Advertisement in Souvenir</h2>
           <div className="grid md:grid-cols-2 gap-6 items-center">
-            <img src="/images/exhibition.png" alt="Exhibition" className="rounded-md" />
+            <Image
+              src="/images/exhibition.png"
+              alt="Exhibition"
+              width={600}
+              height={400}
+              className="rounded-md"
+            />
             <div className="text-green-400 text-sm space-y-1">
               <p>Exhibition stall: 3m x 3m - ₹50,000</p>
               <p>Front inner cover full page: ₹50,000</p>
