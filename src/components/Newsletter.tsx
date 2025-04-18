@@ -23,7 +23,7 @@ export default function Newsletter() {
       setStatus('error');
     }
   };
-
+// //
   return (
     <section className="px-6 py-16 text-center">
       <h2 className="text-4xl font-bold text-yellow-400 mb-6">Newsletter Sign‑Up</h2>
