@@ -22,7 +22,15 @@
 
 # misc
 .DS_Store
-*.pem
+# Firebase / GCP service‑account credentials
+serviceAccount*.json
+*.serviceAccount.json
+
+# Local Firebase emulator data
+/.firebase
+
+# Next.js incremental cache
+/.next/cache
 
 # debug
 npm-debug.log*
