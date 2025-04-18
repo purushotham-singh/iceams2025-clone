@@ -1,112 +1,103 @@
 'use client';
 
 import React, { useState } from 'react';
+import { db } from '@/lib/firebaseClient';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { motion } from 'framer-motion';
 
 export default function SponsorshipForm() {
-  const [formData, setFormData] = useState({
-    companyName: '',
-    category: '',
-    contactPerson: '',
-    designation: '',
-    mailingAddress: '',
-    tel: '',
-    fax: '',
-    email: '',
-    sponsorship: false,
-    exhibition: false,
-    advertisement: false,
-    amount: '',
-    chequeNo: '',
-    date: '',
-    drawnOn: '',
-  });
+  const [status, setStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const target = e.target as HTMLInputElement | HTMLTextAreaElement;
-    const { name, value, type } = target;
-    const checked = (target as HTMLInputElement).checked;
-
-    setFormData(prev => {
-      return {
-        ...prev,
-        [name]: type === 'checkbox' ? checked : value,
-      };
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Optionally: Add form submission logic
-    window.open('/#sponsorship', '_self'); // Redirect to homepage section
+    const form = e.currentTarget;
+    setStatus('saving');
+
+    const data = new FormData(form);
+    try {
+      await addDoc(collection(db, 'sponsorships'), {
+        companyName: data.get('companyName'),
+        country: data.get('country'),
+        contactPerson: data.get('contactPerson'),
+        designation: data.get('designation'),
+        mailingAddress: data.get('mailingAddress'),
+        phone: data.get('phone'),
+        fax: data.get('fax'),
+        email: data.get('email'),
+        options: {
+          sponsorship: !!data.get('optionSponsorship'),
+          exhibition: !!data.get('optionExhibition'),
+          advertisement: !!data.get('optionAdvertisement'),
+        },
+        amount: data.get('amount'),
+        chequeNumber: data.get('chequeNumber'),
+        chequeDate: data.get('chequeDate'),
+        drawnOn: data.get('drawnOn'),
+        createdAt: serverTimestamp(),
+      });
+      setStatus('success');
+      form.reset();
+    } catch (err) {
+      console.error('Sponsorship submit error:', err);
+      setStatus('error');
+    }
   };
 
   return (
-    <motion.form
-      onSubmit={handleSubmit}
-      initial={{ opacity: 0, y: 30 }}
+    <motion.main
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="bg-white rounded-2xl shadow-lg p-8 space-y-6 max-w-3xl mx-auto"
+      transition={{ duration: 0.6 }}
+      className="min-h-screen bg-white text-gray-900"
     >
-      <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 text-center mb-4">
-        Sponsorship / Exhibition / Advertisement Form
-      </h2>
+      <div className="w-full max-w-2xl mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold mb-6 text-center">
+          Sponsorship / Exhibition / Advertisement Form
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <input name="companyName" placeholder="Company Name" required className="w-full border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
 
-      {/* Company Info */}
-      <input name="companyName" placeholder="Company Name" value={formData.companyName} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
+          <div className="flex items-center gap-6">
+            <label className="text-black"><input type="radio" name="country" value="India" required /> India</label>
+            <label className="text-black"><input type="radio" name="country" value="Overseas" /> Overseas</label>
+          </div>
 
-      <div className="flex gap-4">
-        <label className="flex items-center space-x-2">
-          <input type="radio" name="category" value="India" checked={formData.category === 'India'} onChange={handleChange} className="h-5 w-5 text-black focus:ring-0" />
-          <span className="text-gray-800">India</span>
-        </label>
-        <label className="flex items-center space-x-2">
-          <input type="radio" name="category" value="Overseas" checked={formData.category === 'Overseas'} onChange={handleChange} className="h-5 w-5 text-black focus:ring-0" />
-          <span className="text-gray-800">Overseas</span>
-        </label>
+          <input name="contactPerson" placeholder="Contact Person" required className="w-full border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+          <input name="designation" placeholder="Designation" className="w-full border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+          <textarea name="mailingAddress" rows={3} placeholder="Mailing Address" className="w-full border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"></textarea>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <input name="phone" placeholder="Tel" className="border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+            <input name="fax" placeholder="Fax" className="border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+            <input name="email" placeholder="Email" type="email" required className="border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+          </div>
+
+          <div className="flex gap-4">
+            <label className="text-black"><input type="checkbox" name="optionSponsorship" /> Sponsorship</label>
+            <label className="text-black"><input type="checkbox" name="optionExhibition" /> Exhibition Stall</label>
+            <label className="text-black"><input type="checkbox" name="optionAdvertisement" /> Advertisement</label>
+          </div>
+
+          <input name="amount" placeholder="Amount" className="w-full border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <input name="chequeNumber" placeholder="Cheque / DD No" className="border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+            <input name="chequeDate" type="date" className="border px-4 py-2 rounded text-black focus:outline-none focus:ring-2 focus:ring-gray-400" />
+            <input name="drawnOn" placeholder="Drawn On" className="border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+          </div>
+
+          <button
+            type="submit"
+            disabled={status === 'saving'}
+            className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition"
+          >
+            {status === 'saving' ? 'Submitting...' : 'Submit and Return to Sponsorship Section'}
+          </button>
+
+          {status === 'success' && <p className="text-green-600 text-center">Submission received!</p>}
+          {status === 'error' && <p className="text-red-600 text-center">There was an error. Please try again.</p>}
+        </form>
       </div>
-
-      <input name="contactPerson" placeholder="Contact Person" value={formData.contactPerson} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
-      <input name="designation" placeholder="Designation" value={formData.designation} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
-      <textarea name="mailingAddress" placeholder="Mailing Address" value={formData.mailingAddress} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" rows={3} />
-
-      {/* Contact Info */}
-      <div className="grid grid-cols-3 gap-4">
-        <input name="tel" placeholder="Tel" value={formData.tel} onChange={handleChange} className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
-        <input name="fax" placeholder="Fax" value={formData.fax} onChange={handleChange} className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
-        <input name="email" placeholder="Email" type="email" value={formData.email} onChange={handleChange} className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
-      </div>
-
-      {/* Checkboxes */}
-      <div className="flex gap-4 mt-2">
-        <label className="flex items-center space-x-2">
-          <input type="checkbox" name="sponsorship" checked={formData.sponsorship} onChange={handleChange} className="h-5 w-5 text-black focus:ring-0" />
-          <span className="text-gray-800">Sponsorship</span>
-        </label>
-        <label className="flex items-center space-x-2">
-          <input type="checkbox" name="exhibition" checked={formData.exhibition} onChange={handleChange} className="h-5 w-5 text-black focus:ring-0" />
-          <span className="text-gray-800">Exhibition Stall</span>
-        </label>
-        <label className="flex items-center space-x-2">
-          <input type="checkbox" name="advertisement" checked={formData.advertisement} onChange={handleChange} className="h-5 w-5 text-black focus:ring-0" />
-          <span className="text-gray-800">Advertisement</span>
-        </label>
-      </div>
-
-      {/* Payment Info */}
-      <input name="amount" placeholder="Amount" value={formData.amount} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
-      <div className="grid grid-cols-3 gap-4">
-        <input name="chequeNo" placeholder="Cheque / DD No" value={formData.chequeNo} onChange={handleChange} className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
-        <input name="date" placeholder="Date" value={formData.date} onChange={handleChange} className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
-        <input name="drawnOn" placeholder="Drawn On" value={formData.drawnOn} onChange={handleChange} className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition" />
-      </div>
-
-      <button type="submit" className="w-full mt-4 bg-black text-white py-3 rounded-lg font-semibold shadow hover:bg-gray-800 transition">
-        Submit and Return to Sponsorship Section
-      </button>
-    </motion.form>
+    </motion.main>
   );
 }
