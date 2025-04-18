@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "iceams2025-prod",  
+    "prod":    "iceams2025-prod"
+  }
+}
