@@ -47,19 +47,21 @@ export default function RegistrationFormPage() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="min-h-screen bg-white text-gray-900"
+      className="min-h-screen bg-white text-gray-900 font-sans px-6 py-16"
     >
-      <div className="w-full max-w-2xl mx-auto px-6">
-        <div className="bg-gray-100 border border-gray-200 text-gray-800 text-sm rounded-lg px-4 py-3 mb-6">
-          <strong className="block font-semibold">BULK REGISTRATION DISCOUNT</strong>
-          Bulk registrations (10 and above) may contact organisers for discount.
-        </div>
-        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
+      <div className="w-full max-w-3xl mx-auto">
+        <h1 className="text-3xl font-bold text-center mb-10">
           Delegate Registration Form – ICEAMS 2025
         </h1>
 
-        <div className="bg-white rounded-2xl shadow-md p-8 space-y-6">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+        <div className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm space-y-8">
+          <motion.form
+            className="space-y-6"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            onSubmit={handleSubmit}
+          >
             {/* Name */}
             <div>
               <label className="block mb-1 font-semibold">Name</label>
@@ -67,7 +69,7 @@ export default function RegistrationFormPage() {
                 name="name"
                 type="text"
                 required
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               />
             </div>
 
@@ -78,7 +80,7 @@ export default function RegistrationFormPage() {
                 name="spouseName"
                 type="text"
                 required
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               />
             </div>
 
@@ -93,7 +95,7 @@ export default function RegistrationFormPage() {
                       name="category"
                       value={option}
                       required
-                      className="form-radio h-5 w-5 focus:ring-0"
+                      className="form-radio h-4 w-4 text-gray-800 focus:ring-0"
                     />
                     <span>{option}</span>
                   </label>
@@ -107,7 +109,7 @@ export default function RegistrationFormPage() {
               <input
                 name="membershipNumber"
                 type="text"
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               />
             </div>
 
@@ -117,7 +119,7 @@ export default function RegistrationFormPage() {
                 name="overseas"
                 type="checkbox"
                 id="overseas"
-                className="form-checkbox h-5 w-5 focus:ring-0"
+                className="form-checkbox h-4 w-4 text-gray-800 focus:ring-0"
               />
               <label htmlFor="overseas">Overseas</label>
             </div>
@@ -128,7 +130,7 @@ export default function RegistrationFormPage() {
               <input
                 name="organization"
                 type="text"
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               />
             </div>
 
@@ -138,7 +140,7 @@ export default function RegistrationFormPage() {
               <input
                 name="designation"
                 type="text"
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               />
             </div>
 
@@ -148,7 +150,7 @@ export default function RegistrationFormPage() {
               <textarea
                 name="mailingAddress"
                 rows={3}
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               />
             </div>
 
@@ -159,19 +161,19 @@ export default function RegistrationFormPage() {
                 <input
                   name="phone"
                   placeholder="Phone"
-                  className="border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                 />
                 <input
                   name="fax"
                   placeholder="Fax"
-                  className="border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                 />
                 <input
                   name="email"
                   type="email"
                   placeholder="Email"
                   required
-                  className="border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                 />
               </div>
             </div>
@@ -188,7 +190,7 @@ export default function RegistrationFormPage() {
                     checked={paymentMethod === 'cheque'}
                     onChange={() => setPaymentMethod('cheque')}
                     required
-                    className="form-radio h-5 w-5 focus:ring-0"
+                    className="form-radio h-4 w-4 text-gray-800 focus:ring-0"
                   />
                   <span>Cheque / DD</span>
                 </label>
@@ -199,7 +201,7 @@ export default function RegistrationFormPage() {
                     value="upi"
                     checked={paymentMethod === 'upi'}
                     onChange={() => setPaymentMethod('upi')}
-                    className="form-radio h-5 w-5 focus:ring-0"
+                    className="form-radio h-4 w-4 text-gray-800 focus:ring-0"
                   />
                   <span>UPI / Online</span>
                 </label>
@@ -211,12 +213,12 @@ export default function RegistrationFormPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block mb-1 font-semibold">Cheque / DD No.</label>
-                  <input
-                    name="chequeNumber"
-                    type="text"
-                    required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
-                  />
+                    <input
+                      name="chequeNumber"
+                      type="text"
+                      required
+                      className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
+                    />
                 </div>
                 <div>
                   <label className="block mb-1 font-semibold">Cheque / DD Date</label>
@@ -224,7 +226,7 @@ export default function RegistrationFormPage() {
                     name="chequeDate"
                     type="date"
                     required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                    className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                   />
                 </div>
                 <div>
@@ -233,7 +235,7 @@ export default function RegistrationFormPage() {
                     name="bankName"
                     type="text"
                     required
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                    className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                   />
                 </div>
                 <div>
@@ -258,7 +260,7 @@ export default function RegistrationFormPage() {
                     type="text"
                     required
                     placeholder="example@bank"
-                    className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                    className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                   />
                 </div>
                 <div>
@@ -278,22 +280,18 @@ export default function RegistrationFormPage() {
             <button
               type="submit"
               disabled={status === 'saving'}
-              className="mt-6 w-full bg-black text-white font-semibold py-3 rounded-lg shadow-md hover:bg-gray-800 transition"
+              className="mt-6 w-full bg-gray-900 text-white font-semibold py-3 rounded-md hover:bg-gray-800 transition-colors duration-200"
             >
               {status === 'saving' ? 'Submitting...' : 'Submit'}
             </button>
 
             {status === 'success' && (
-              <p className="mt-4 text-green-600 text-center">
-                Registration submitted successfully!
-              </p>
+              <p className="mt-4 text-green-600 text-center text-sm font-medium">Registration submitted successfully!</p>
             )}
             {status === 'error' && (
-              <p className="mt-4 text-red-600 text-center">
-                Error submitting registration. Please try again.
-              </p>
+              <p className="mt-4 text-red-600 text-center text-sm font-medium">Error submitting registration. Please try again.</p>
             )}
-          </form>
+          </motion.form>
         </div>
       </div>
     </motion.main>

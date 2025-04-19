@@ -1,6 +1,34 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ========================================
+# 🔒 General Confidential & Sensitive Files
+# ========================================
+.env*
+.env*.local
+*.pem
+*.key
+*.crt
 
-# dependencies
+# ========================================
+# 🔥 Firebase
+# ========================================
+/.firebase
+firebase-debug.log
+firebase.json
+.firebaserc
+serviceAccount*.json
+*.serviceAccount.json
+src/app/lib/firebaseClient.ts
+
+# ========================================
+# 🚀 Next.js
+# ========================================
+.next/
+.next/cache
+/out/
+/build
+
+# ========================================
+# 📦 Node/Yarn/Pnpm
+# ========================================
 /node_modules
 /.pnp
 .pnp.*
@@ -10,41 +38,25 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# ========================================
+# 🧪 Testing
+# ========================================
 /coverage
 
-# next.js
-/.next/
-/out/
+# ========================================
+# ⚙️ Vercel & Deployment
+# ========================================
+.vercel
 
-# production
-/build
+# ========================================
+# 🛠️ TypeScript
+*.tsbuildinfo
+next-env.d.ts
 
-# misc
+# ========================================
+# 🧹 Miscellaneous
 .DS_Store
-# Firebase / GCP service‑account credentials
-serviceAccount*.json
-*.serviceAccount.json
-
-# Local Firebase emulator data
-/.firebase
-
-# Next.js incremental cache
-/.next/cache
-
-# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-.env*.local

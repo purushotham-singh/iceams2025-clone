@@ -49,21 +49,23 @@ export default function SponsorshipProductsSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-16">
+    <section className="relative w-full bg-transparent py-32 font-sans backdrop-blur-xl rounded-3xl shadow-2xl select-none overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-12">All Products</h2>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <h2 className="text-6xl font-black text-black drop-shadow-md mb-16 tracking-tight z-10 relative">
+          All Sponsorship Products
+        </h2>
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 z-10 relative">
           {products.map((product) => (
             <div
               key={product.title}
-              className="bg-white rounded-2xl border border-gray-200 shadow-md p-6 hover:shadow-xl hover:scale-105 transition-transform duration-300"
+              className="group bg-white/70 rounded-2xl border border-gray-200 shadow-md p-8 hover:shadow-2xl hover:scale-[1.03] transition-transform duration-500 backdrop-blur-md"
             >
               <Image
                 src={product.image}
                 alt={product.title}
                 width={128}
                 height={128}
-                className="object-contain mb-4 w-full"
+                className="object-contain mb-4 w-full group-hover:scale-110 transition-transform duration-500"
               />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 {product.title}
@@ -75,7 +77,7 @@ export default function SponsorshipProductsSection() {
               {product.discount && (
                 <p className="text-sm text-gray-600 mb-4">{product.discount}</p>
               )}
-              <button className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200">
+              <button className="w-full bg-black text-white py-3 rounded-full text-lg font-semibold hover:bg-gradient-to-r hover:from-[#0A84FF] hover:to-[#0060DF] hover:text-white transition-all duration-300 hover:scale-105">
                 + Quick View
               </button>
             </div>

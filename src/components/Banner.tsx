@@ -1,13 +1,10 @@
-/* eslint-disable react/no-unescaped-entities */
-'use client';
-import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 const MotionImage = motion(Image);
 
 export function Banner() {
   return (
-    <section className="relative bg-gradient-to-b from-gray-100 via-white to-gray-100 text-gray-900 py-24 overflow-hidden">
+    <section className="relative bg-gradient-to-b from-white via-gray-50 to-white text-gray-900 py-28 px-6 sm:px-12 lg:px-20 overflow-hidden backdrop-blur-md bg-opacity-30 rounded-xl shadow-xl font-sans select-none">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -18,7 +15,7 @@ export function Banner() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
-          className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 drop-shadow-sm mb-4"
+          className="text-6xl md:text-8xl font-semibold tracking-tight text-gray-900 drop-shadow-md mb-6 leading-tight"
         >
           ICEAMS–2025
         </motion.h1>
@@ -27,7 +24,7 @@ export function Banner() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-lg md:text-xl text-gray-900 mb-4 font-semibold"
+          className="text-xl md:text-2xl text-gray-800 mb-4 font-medium"
         >
           2–5 July 2025, Venue: IIT Hyderabad, Kandi, Telangana, India
         </motion.p>
@@ -36,7 +33,7 @@ export function Banner() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.8 }}
-          className="text-base md:text-lg text-gray-700 italic mb-10 max-w-3xl mx-auto"
+          className="text-base md:text-lg text-gray-600 italic mb-12 max-w-3xl mx-auto"
         >
           Theme: "Advanced Materials and Structures – Innovations, Technologies and Way Forward"
         </motion.p>
@@ -62,9 +59,9 @@ export function Banner() {
               key={i}
               src={`/images/${logo}`}
               alt={`${logo.split('-')[0]} Logo`}
-              width={80}
-              height={80}
-              className="object-contain transition-transform hover:scale-105 duration-300 ease-in-out"
+              width={100}
+              height={100}
+              className="object-contain transition-transform hover:scale-110 duration-500 ease-in-out"
               variants={{
                 hidden: { opacity: 0, scale: 0.9 },
                 visible: { opacity: 1, scale: 1 },
