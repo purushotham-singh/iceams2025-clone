@@ -35,7 +35,7 @@ export function Banner() {
           transition={{ delay: 0.7, duration: 0.8 }}
           className="text-base md:text-lg text-gray-600 italic mb-12 max-w-3xl mx-auto"
         >
-          Theme: "Advanced Materials and Structures – Innovations, Technologies and Way Forward"
+          Theme: &quot;Advanced Materials and Structures – Innovations, Technologies and Way Forward&quot;
         </motion.p>
 
         <motion.div

@@ -27,16 +27,6 @@ export default function RegistrationDetails() {
             </li>
           ))}
         </ul>
-        <div className="relative">
-          <div className="absolute -top-24 right-0 sm:right-10 md:right-16 z-10 transform hover:scale-105 transition-transform duration-300">
-            <a
-              href="/registration"
-              className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 hover:text-white hover:no-underline transition-all duration-300 transform hover:scale-105"
-            >
-              ⚡ Instant Registration
-            </a>
-          </div>
-        </div>
         <div className="space-y-4 border-l-4 border-gray-200 pl-6 text-base text-gray-700 leading-relaxed mt-10">
           <p><strong>Last date for registration:</strong> 15 June 2025</p>
           <p><strong>Includes:</strong> Full conference access, sessions, meals, and delegate kit.</p>
@@ -54,6 +44,14 @@ export default function RegistrationDetails() {
               <li><strong>Bank:</strong> Canara Bank, Kanchanbagh, Hyderabad 500059</li>
             </ul>
           </div>
+        </div>
+        <div className="mt-10 text-center">
+          <a
+            href="/registration"
+            className="inline-block bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 hover:text-white hover:no-underline transition-all duration-300 transform hover:scale-105"
+          >
+            ⚡ Instant Registration
+          </a>
         </div>
       </div>
     </section>
