@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 
 export default function SponsorshipForm() {
   const [status, setStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
+  const [paymentMethod, setPaymentMethod] = useState<'cheque' | 'upi' | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -80,21 +81,115 @@ export default function SponsorshipForm() {
 
           <input name="amount" placeholder="Amount" className="w-full border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <input name="chequeNumber" placeholder="Cheque / DD No" className="border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
-            <input name="chequeDate" type="date" className="border px-4 py-2 rounded text-black focus:outline-none focus:ring-2 focus:ring-gray-400" />
-            <input name="drawnOn" placeholder="Drawn On" className="border px-4 py-2 rounded text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+          {/* Mode of Payment */}
+          <div>
+            <label className="block mb-1 font-semibold">Mode of Payment</label>
+            <div className="flex items-center space-x-6">
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="cheque"
+                  checked={paymentMethod === 'cheque'}
+                  onChange={() => setPaymentMethod('cheque')}
+                  required
+                  className="form-radio h-5 w-5 focus:ring-0"
+                />
+                <span>Cheque / DD</span>
+              </label>
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="upi"
+                  checked={paymentMethod === 'upi'}
+                  onChange={() => setPaymentMethod('upi')}
+                  className="form-radio h-5 w-5 focus:ring-0"
+                />
+                <span>UPI / Online</span>
+              </label>
+            </div>
           </div>
+          {paymentMethod === 'cheque' && (
+            <div className="space-y-4">
+              <div>
+                <label className="block mb-1 font-semibold">Cheque / DD No.</label>
+                <input
+                  name="chequeNumber"
+                  type="text"
+                  required
+                  className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                />
+              </div>
+              <div>
+                <label className="block mb-1 font-semibold">Cheque / DD Date</label>
+                <input
+                  name="chequeDate"
+                  type="date"
+                  required
+                  className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                />
+              </div>
+              <div>
+                <label className="block mb-1 font-semibold">Bank Name & Branch</label>
+                <input
+                  name="bankName"
+                  type="text"
+                  required
+                  className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                />
+              </div>
+              <div>
+                <label className="block mb-1 font-semibold">Upload Payment Proof</label>
+                <input
+                  name="paymentProof"
+                  type="file"
+                  accept=".jpg,.png,.pdf"
+                  required
+                  className="w-full"
+                />
+              </div>
+            </div>
+          )}
+
+          {paymentMethod === 'upi' && (
+            <div className="space-y-4">
+              <div>
+                <label className="block mb-1 font-semibold">UPI ID</label>
+                <input
+                  name="upiId"
+                  type="text"
+                  required
+                  placeholder="example@bank"
+                  className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                />
+              </div>
+              <div>
+                <label className="block mb-1 font-semibold">Upload UPI Transaction Screenshot</label>
+                <input
+                  name="paymentProof"
+                  type="file"
+                  accept=".jpg,.png,.pdf"
+                  required
+                  className="w-full"
+                />
+              </div>
+            </div>
+          )}
 
           <button
             type="submit"
             disabled={status === 'saving'}
             className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition"
           >
-            {status === 'saving' ? 'Submitting...' : 'Submit and Return to Sponsorship Section'}
+            {status === 'saving' ? 'Submitting...' : 'Done'}
           </button>
 
-          {status === 'success' && <p className="text-green-600 text-center">Submission received!</p>}
+          {status === 'success' && (
+            <p className="text-green-600 text-center">
+              Submission received!
+            </p>
+          )}
           {status === 'error' && <p className="text-red-600 text-center">There was an error. Please try again.</p>}
         </form>
       </div>

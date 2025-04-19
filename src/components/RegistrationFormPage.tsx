@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 
 export default function RegistrationFormPage() {
   const [status, setStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
+  const [paymentMethod, setPaymentMethod] = useState<'cheque' | 'upi'>('cheque');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +27,11 @@ export default function RegistrationFormPage() {
         phone: formData.get('phone'),
         fax: formData.get('fax'),
         email: formData.get('email'),
-        modeOfPayment: formData.get('modeOfPayment'),
+        paymentMethod: formData.get('paymentMethod'),
+        chequeNumber: formData.get('chequeNumber'),
+        chequeDate: formData.get('chequeDate'),
+        bankName: formData.get('bankName'),
+        upiId: formData.get('upiId'),
         createdAt: serverTimestamp()
       });
       setStatus('success');
@@ -171,28 +176,103 @@ export default function RegistrationFormPage() {
               </div>
             </div>
 
-            {/* Mode of Payment */}
+            {/* Mode of Payment Selection */}
             <div>
               <label className="block mb-1 font-semibold">Mode of Payment</label>
-              <input
-                name="modeOfPayment"
-                type="text"
-                placeholder="Cheque/DD No, Date, Bank"
-                className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
-              />
+              <div className="flex items-center space-x-6">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="cheque"
+                    checked={paymentMethod === 'cheque'}
+                    onChange={() => setPaymentMethod('cheque')}
+                    required
+                    className="form-radio h-5 w-5 focus:ring-0"
+                  />
+                  <span>Cheque / DD</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="upi"
+                    checked={paymentMethod === 'upi'}
+                    onChange={() => setPaymentMethod('upi')}
+                    className="form-radio h-5 w-5 focus:ring-0"
+                  />
+                  <span>UPI / Online</span>
+                </label>
+              </div>
             </div>
 
-            {/* UPI & Online Payments */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mt-6 transition"
-            >
-              <h3 className="text-lg font-semibold mb-2">UPI & Online Payments</h3>
-              <p>Name: Convener, ICEAMS 2025</p>
-              <p>Account No: 120033088534</p>
-              <p>IFSC Code: CNRB0001849</p>
-              <p>MICR: 500015032</p>
-            </motion.div>
+            {/* Cheque / DD Details */}
+            {paymentMethod === 'cheque' && (
+              <div className="space-y-4">
+                <div>
+                  <label className="block mb-1 font-semibold">Cheque / DD No.</label>
+                  <input
+                    name="chequeNumber"
+                    type="text"
+                    required
+                    className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  />
+                </div>
+                <div>
+                  <label className="block mb-1 font-semibold">Cheque / DD Date</label>
+                  <input
+                    name="chequeDate"
+                    type="date"
+                    required
+                    className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  />
+                </div>
+                <div>
+                  <label className="block mb-1 font-semibold">Bank Name & Branch</label>
+                  <input
+                    name="bankName"
+                    type="text"
+                    required
+                    className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  />
+                </div>
+                <div>
+                  <label className="block mb-1 font-semibold">Upload Payment Proof</label>
+                  <input
+                    name="paymentProof"
+                    type="file"
+                    accept=".jpg,.png,.pdf"
+                    className="w-full"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* UPI / Online Details */}
+            {paymentMethod === 'upi' && (
+              <div className="space-y-4">
+                <div>
+                  <label className="block mb-1 font-semibold">UPI ID</label>
+                  <input
+                    name="upiId"
+                    type="text"
+                    required
+                    placeholder="example@bank"
+                    className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  />
+                </div>
+                <div>
+                  <label className="block mb-1 font-semibold">Upload UPI Transaction Screenshot</label>
+                  <input
+                    name="paymentProof"
+                    type="file"
+                    accept=".jpg,.png,.pdf"
+                    required
+                    className="w-full"
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Submit Button & Feedback */}
             <button
@@ -200,7 +280,7 @@ export default function RegistrationFormPage() {
               disabled={status === 'saving'}
               className="mt-6 w-full bg-black text-white font-semibold py-3 rounded-lg shadow-md hover:bg-gray-800 transition"
             >
-              {status === 'saving' ? 'Submitting...' : 'Submit Registration'}
+              {status === 'saving' ? 'Submitting...' : 'Submit'}
             </button>
 
             {status === 'success' && (

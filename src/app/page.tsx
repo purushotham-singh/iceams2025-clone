@@ -2,8 +2,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-
 import { Banner } from '@/components/Banner';
 import AboutIceamsSection from '@/components/AboutIceamsSection';
 import CallForPapersSection from '@/components/CallForPapersSection';
